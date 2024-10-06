@@ -1,0 +1,6 @@
+FROM docker.io/library/registry:2.8.3
+
+COPY DESKTOP-2NRMRN3.nfs.info.key /certs/DESKTOP-2NRMRN3.nfs.info.key
+COPY DESKTOP-2NRMRN3.nfs.info.crt /certs/DESKTOP-2NRMRN3.nfs.info.crt
+
+EXPOSE 443 
