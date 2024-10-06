@@ -1,6 +1,21 @@
 FROM docker.io/library/registry:2.8.3
 
-COPY DESKTOP-2NRMRN3.nfs.info.key /certs/DESKTOP-2NRMRN3.nfs.info.key
-COPY DESKTOP-2NRMRN3.nfs.info.crt /certs/DESKTOP-2NRMRN3.nfs.info.crt
+COPY DESKTOP-2NRMRN3.nfs.info.key /certs/server.key
+COPY DESKTOP-2NRMRN3.nfs.info.crt /certs/server.crt
+COPY config.yml /etc/docker/registry/config.yml
 
 EXPOSE 443 
+
+
+# podman volume create -o device=/mnt/registry/auth -o=o=bind registry_auth_vol
+# podman volume create -o device=/mnt/registry/certs -o=o=bind registry_certs_vol
+# podman volume create -o device=/mnt/registry/registry -o=o=bind registry_registry_vol
+
+# name='my-2.8.3' && podman run -d --rm --hostname my-registry --name my-registry -v registry_auth_vol:/auth:Z -v registry_certs_vol:/certs:Z -v registry_registry_vol:/var/lib/registry:Z --network host registry:${name}
+# name='my-2.8.3' && podman run -d --rm --hostname my-registry --name my-registry --network host registry:${name}
+
+# cd ~/.config/systemd/user
+# podman generate systemd --new --files --name my-rabbit
+# name='my-2.8.3' && podman build -f Containerfile_registry -t registry:${name} .
+# systemctl --user stop container-my-registry.service
+# systemctl --user start container-my-registry.service
