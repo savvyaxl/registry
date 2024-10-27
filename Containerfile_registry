@@ -19,3 +19,6 @@ EXPOSE 443
 # name='my-2.8.3' && podman build -f Containerfile_registry -t registry:${name} .
 # systemctl --user stop container-my-registry.service
 # systemctl --user start container-my-registry.service
+
+# to run in docker that runs in wsl2
+# netsh interface portproxy add v4tov4 listenport=443 listenaddress=0.0.0.0 connectport=443 connectaddress=172.19.67.162
